@@ -1,0 +1,64 @@
+class Student:
+    def __init__(self,name,id,marks):
+        self.name = name
+        self.id = id
+        self.marks = marks
+        self.g = self.grade()
+    def grade(self):
+        if self.marks >=90:
+            return "A"
+        elif self.marks >=75:
+            return "B"
+        elif self.marks >=50:
+            return "C"
+        else:
+            return "Fail"
+    def display(self):
+        print(f"Name: {self.name}")
+        print(f"Id: {self.id}")
+        print(f"Marks: {self.marks}")
+        print(f"Grade: {self.g}")
+class StudentManager():
+    def __init__(self):
+        self.students = []
+    def add(self,x):
+        self.students.append(x)
+    def show(self):
+        for s in self.students:
+            s.display()
+            print("-"*(6+len(s.name)))
+    def search(self,search):
+        for s in self.students:
+            if s.id == search:
+                return s.display()
+        return print(None)
+    def delete(self,search):
+        for s in self.students:
+            if s.id == search:
+                self.students.remove(s)
+                print(f"{search} deleted from data successfully")
+manage = StudentManager()
+
+while True:
+    print("1. Add Student")
+    print("2. Show Students")
+    print("3. Search Student")
+    print("4. Delete Student")
+    print("5. Exit")
+    ch = input("Enter your choice: ")
+    if ch == "1":
+        name = input("Enter name: ")
+        id = input("Enter id: ")
+        marks = int(input("Enter marks: "))
+        object = Student(name, id, marks)
+        manage.add(object)
+    elif ch == "2":
+        manage.show()
+    elif ch == "3":
+        search = input("Enter id: ")
+        manage.search(search)
+    elif ch == "4":
+        search = input("Enter id: ")
+        manage.delete(search)
+    elif ch == "5":
+        break
